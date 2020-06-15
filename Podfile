@@ -5,6 +5,7 @@ use_frameworks!
 target 'Weather' do
 
   pod 'SwiftLint'
+  pod 'R.swift'
   
   target 'WeatherTests' do
     inherit! :search_paths
