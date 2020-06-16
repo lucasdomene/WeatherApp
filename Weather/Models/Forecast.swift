@@ -11,13 +11,13 @@ import Foundation
 struct Forecast {
     let temperature: Temperature
     let info: [WeatherInfo]
-    let unixDate: Double
+    let timestamp: Double
 }
 
 extension Forecast: Codable {
     enum CodingKeys: String, CodingKey {
         case temperature = "temp"
         case info = "weather"
-        case unixDate = "dt"
+        case timestamp = "dt"
     }
 }
