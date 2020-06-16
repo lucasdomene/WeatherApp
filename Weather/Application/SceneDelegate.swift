@@ -11,6 +11,18 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    
+    // Default Session
+    lazy var session = URLSession.shared
+    
+    // Default Encoder
+    lazy var parameterEncoder = ParameterEncoder(
+        bodyEncoder: BodyEncoder(),
+        urlEncoder: URLEncoder()
+    )
+    
+    // Network Instance
+    lazy var networkManager = NetworkManager(session: session, parameterEncoder: parameterEncoder)
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -18,23 +30,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let session = URLSession.shared
-        let parameterEncoder = ParameterEncoder(
-            bodyEncoder: BodyEncoder(),
-            urlEncoder: URLEncoder()
+        let navigationController = UINavigationController()
+        window?.rootViewController = navigationController
+        
+        let mainNavigator = MainNavigator(
+            navigationController: navigationController,
+            networkManager: networkManager
         )
+        mainNavigator.navigate(to: .weather)
         
-        let networkManager = NetworkManager(
-            session: session,
-            parameterEncoder: parameterEncoder
-        )
-        
-        let service = WeatherService(networkManager: networkManager)
-        let weatherViewModel = WeatherViewModel(weatherService: service)
-        let weatherViewController = WeatherViewController(viewModel: weatherViewModel)
-        weatherViewModel.view = weatherViewController
-        
-        window?.rootViewController = weatherViewController
         window?.makeKeyAndVisible()
     }
 
