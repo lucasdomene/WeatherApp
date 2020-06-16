@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Kingfisher
 
 class WeatherViewController: UIViewController {
     
     let viewModel: WeatherViewModel
+    var gradientLayer: CAGradientLayer?
     
     lazy var cityLabel: UILabel = {
         let title = UILabel()
@@ -56,24 +58,30 @@ class WeatherViewController: UIViewController {
         self.temperatureLabel.text = weather.temperature
         self.cityLabel.text = "Rio de Janeiro"
         self.weatherConditionView.conditionLabel.text = weather.condition
-        self.weatherConditionView.iconImageView.image = R.image.weatherCondition()
+        self.weatherConditionView.iconImageView.kf.setImage(
+            with: weather.iconURL,
+            placeholder: R.image.weatherCondition()
+        )
         self.setBackgroundColor(for: weather.code)
     }
     
     private func setBackgroundColor(for code: Int = 800) {
-        let gradientLayer = CAGradientLayer()
+        if gradientLayer != nil {
+            gradientLayer!.removeFromSuperlayer()
+        }
+        
+        gradientLayer = CAGradientLayer()
+        gradientLayer!.shouldRasterize = true
+        gradientLayer!.frame = view.bounds
         
         let colors = WeatherColor(code: code).colors
         
-        gradientLayer.colors = [
+        gradientLayer!.colors = [
             colors.dayColor.startColor,
             colors.dayColor.endColor
         ]
         
-        gradientLayer.shouldRasterize = true
-        gradientLayer.frame = view.bounds
-        
-        view.layer.insertSublayer(gradientLayer, at: 0)
+        view.layer.insertSublayer(gradientLayer!, at: 0)
     }
     
 }
