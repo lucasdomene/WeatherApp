@@ -24,11 +24,11 @@ class HomeViewController: UIViewController {
             parameterEncoder: parameterEncoder
         )
         
-        let route = WeatherAPI.currentWeather(cityName: "london")
-        networkManager.request(route: route) { result in
+        let service = WeatherService(networkManager: networkManager)
+        service.weather(for: 33.441792, lon: 94.037689) { result in
             switch result {
-            case .success(let data):
-                print(data)
+            case .success(let weather):
+                print(weather)
             case .failure(let error):
                 print(error)
             }

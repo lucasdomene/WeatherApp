@@ -9,34 +9,34 @@
 import Foundation
 
 enum WeatherAPI: Route {
-    
-    case currentWeather(cityName: String)
+
+    case weather(lat: Double, lon: Double)
     
     var path: String {
         switch self {
-        case .currentWeather:
-            return "weather"
+        case .weather:
+            return "onecall"
         }
     }
     
     var httpMethod: HTTPMethod {
         switch self {
-        case .currentWeather:
+        case .weather:
             return .get
         }
     }
     
     var bodyParameters: Parameters {
         switch self {
-        case .currentWeather:
+        case .weather:
             return [:]
         }
     }
     
     var urlParameters: Parameters {
         switch self {
-        case .currentWeather(let cityName):
-            return ["q": cityName]
+        case .weather(let lat, let lon):
+            return ["lat": lat, "lon": lon]
         }
     }
     
