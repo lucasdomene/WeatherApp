@@ -17,7 +17,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
-        window?.rootViewController = WeatherViewController()
+        
+        let session = URLSession.shared
+        let parameterEncoder = ParameterEncoder(
+            bodyEncoder: BodyEncoder(),
+            urlEncoder: URLEncoder()
+        )
+        
+        let networkManager = NetworkManager(
+            session: session,
+            parameterEncoder: parameterEncoder
+        )
+        
+        let service = WeatherService(networkManager: networkManager)
+        let weatherViewModel = WeatherViewModel(weatherService: service)
+        let weatherViewController = WeatherViewController(viewModel: weatherViewModel)
+        weatherViewModel.view = weatherViewController
+        
+        window?.rootViewController = weatherViewController
         window?.makeKeyAndVisible()
     }
 

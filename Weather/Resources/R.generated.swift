@@ -85,6 +85,7 @@ struct R: Rswift.Validatable {
   }
 
   static func validate() throws {
+    try font.validate()
     try intern.validate()
   }
 
@@ -104,6 +105,458 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   #endif
+
+  /// This `R.color` struct is generated, and contains static references to 24 colors.
+  struct color {
+    /// Color `ColorA1`.
+    static let colorA1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorA1")
+    /// Color `ColorA2`.
+    static let colorA2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorA2")
+    /// Color `ColorB1`.
+    static let colorB1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorB1")
+    /// Color `ColorB2`.
+    static let colorB2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorB2")
+    /// Color `ColorC1`.
+    static let colorC1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorC1")
+    /// Color `ColorC2`.
+    static let colorC2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorC2")
+    /// Color `ColorD1`.
+    static let colorD1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorD1")
+    /// Color `ColorD2`.
+    static let colorD2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorD2")
+    /// Color `ColorE1`.
+    static let colorE1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorE1")
+    /// Color `ColorE2`.
+    static let colorE2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorE2")
+    /// Color `ColorF1`.
+    static let colorF1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorF1")
+    /// Color `ColorF2`.
+    static let colorF2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorF2")
+    /// Color `ColorG1`.
+    static let colorG1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorG1")
+    /// Color `ColorG2`.
+    static let colorG2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorG2")
+    /// Color `ColorH1`.
+    static let colorH1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorH1")
+    /// Color `ColorH2`.
+    static let colorH2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorH2")
+    /// Color `ColorI1`.
+    static let colorI1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorI1")
+    /// Color `ColorI2`.
+    static let colorI2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorI2")
+    /// Color `ColorJ1`.
+    static let colorJ1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorJ1")
+    /// Color `ColorJ2`.
+    static let colorJ2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorJ2")
+    /// Color `ColorK1`.
+    static let colorK1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorK1")
+    /// Color `ColorK2`.
+    static let colorK2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorK2")
+    /// Color `ColorL1`.
+    static let colorL1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorL1")
+    /// Color `ColorL2`.
+    static let colorL2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorL2")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorA1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorA1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorA1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorA2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorA2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorA2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorB1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorB1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorB1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorB2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorB2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorB2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorC1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorC1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorC1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorC2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorC2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorC2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorD1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorD1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorD1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorD2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorD2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorD2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorE1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorE1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorE1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorE2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorE2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorE2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorF1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorF1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorF1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorF2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorF2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorF2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorG1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorG1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorG1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorG2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorG2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorG2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorH1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorH1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorH1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorH2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorH2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorH2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorI1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorI1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorI1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorI2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorI2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorI2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorJ1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorJ1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorJ1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorJ2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorJ2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorJ2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorK1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorK1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorK1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorK2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorK2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorK2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorL1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorL1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorL1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorL2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorL2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorL2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+
+  /// This `R.file` struct is generated, and contains static references to 10 files.
+  struct file {
+    /// Resource file `SF-Pro-Rounded-Black.otf`.
+    static let sfProRoundedBlackOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Black", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Bold.otf`.
+    static let sfProRoundedBoldOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Bold", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Heavy.otf`.
+    static let sfProRoundedHeavyOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Heavy", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Light.otf`.
+    static let sfProRoundedLightOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Light", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Medium.otf`.
+    static let sfProRoundedMediumOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Medium", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Regular.otf`.
+    static let sfProRoundedRegularOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Regular", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Semibold.otf`.
+    static let sfProRoundedSemiboldOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Semibold", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Thin.otf`.
+    static let sfProRoundedThinOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Thin", pathExtension: "otf")
+    /// Resource file `SF-Pro-Rounded-Ultralight.otf`.
+    static let sfProRoundedUltralightOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Ultralight", pathExtension: "otf")
+    /// Resource file `weather-condition.png`.
+    static let weatherConditionPng = Rswift.FileResource(bundle: R.hostingBundle, name: "weather-condition", pathExtension: "png")
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Black", withExtension: "otf")`
+    static func sfProRoundedBlackOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedBlackOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Bold", withExtension: "otf")`
+    static func sfProRoundedBoldOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedBoldOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Heavy", withExtension: "otf")`
+    static func sfProRoundedHeavyOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedHeavyOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Light", withExtension: "otf")`
+    static func sfProRoundedLightOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedLightOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Medium", withExtension: "otf")`
+    static func sfProRoundedMediumOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedMediumOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Regular", withExtension: "otf")`
+    static func sfProRoundedRegularOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedRegularOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Semibold", withExtension: "otf")`
+    static func sfProRoundedSemiboldOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedSemiboldOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Thin", withExtension: "otf")`
+    static func sfProRoundedThinOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedThinOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "SF-Pro-Rounded-Ultralight", withExtension: "otf")`
+    static func sfProRoundedUltralightOtf(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.sfProRoundedUltralightOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "weather-condition", withExtension: "png")`
+    static func weatherConditionPng(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.weatherConditionPng
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.font` struct is generated, and contains static references to 9 fonts.
+  struct font: Rswift.Validatable {
+    /// Font `SFProRounded-Black`.
+    static let sfProRoundedBlack = Rswift.FontResource(fontName: "SFProRounded-Black")
+    /// Font `SFProRounded-Bold`.
+    static let sfProRoundedBold = Rswift.FontResource(fontName: "SFProRounded-Bold")
+    /// Font `SFProRounded-Heavy`.
+    static let sfProRoundedHeavy = Rswift.FontResource(fontName: "SFProRounded-Heavy")
+    /// Font `SFProRounded-Light`.
+    static let sfProRoundedLight = Rswift.FontResource(fontName: "SFProRounded-Light")
+    /// Font `SFProRounded-Medium`.
+    static let sfProRoundedMedium = Rswift.FontResource(fontName: "SFProRounded-Medium")
+    /// Font `SFProRounded-Regular`.
+    static let sfProRoundedRegular = Rswift.FontResource(fontName: "SFProRounded-Regular")
+    /// Font `SFProRounded-Semibold`.
+    static let sfProRoundedSemibold = Rswift.FontResource(fontName: "SFProRounded-Semibold")
+    /// Font `SFProRounded-Thin`.
+    static let sfProRoundedThin = Rswift.FontResource(fontName: "SFProRounded-Thin")
+    /// Font `SFProRounded-Ultralight`.
+    static let sfProRoundedUltralight = Rswift.FontResource(fontName: "SFProRounded-Ultralight")
+
+    /// `UIFont(name: "SFProRounded-Black", size: ...)`
+    static func sfProRoundedBlack(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedBlack, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Bold", size: ...)`
+    static func sfProRoundedBold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedBold, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Heavy", size: ...)`
+    static func sfProRoundedHeavy(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedHeavy, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Light", size: ...)`
+    static func sfProRoundedLight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedLight, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Medium", size: ...)`
+    static func sfProRoundedMedium(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedMedium, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Regular", size: ...)`
+    static func sfProRoundedRegular(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedRegular, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Semibold", size: ...)`
+    static func sfProRoundedSemibold(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedSemibold, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Thin", size: ...)`
+    static func sfProRoundedThin(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedThin, size: size)
+    }
+
+    /// `UIFont(name: "SFProRounded-Ultralight", size: ...)`
+    static func sfProRoundedUltralight(size: CGFloat) -> UIKit.UIFont? {
+      return UIKit.UIFont(resource: sfProRoundedUltralight, size: size)
+    }
+
+    static func validate() throws {
+      if R.font.sfProRoundedBlack(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Black' could not be loaded, is 'SF-Pro-Rounded-Black.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedBold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Bold' could not be loaded, is 'SF-Pro-Rounded-Bold.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedHeavy(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Heavy' could not be loaded, is 'SF-Pro-Rounded-Heavy.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedLight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Light' could not be loaded, is 'SF-Pro-Rounded-Light.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedMedium(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Medium' could not be loaded, is 'SF-Pro-Rounded-Medium.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedRegular(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Regular' could not be loaded, is 'SF-Pro-Rounded-Regular.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedSemibold(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Semibold' could not be loaded, is 'SF-Pro-Rounded-Semibold.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedThin(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Thin' could not be loaded, is 'SF-Pro-Rounded-Thin.otf' added to the UIAppFonts array in this targets Info.plist?") }
+      if R.font.sfProRoundedUltralight(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'SFProRounded-Ultralight' could not be loaded, is 'SF-Pro-Rounded-Ultralight.otf' added to the UIAppFonts array in this targets Info.plist?") }
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.image` struct is generated, and contains static references to 1 images.
+  struct image {
+    /// Image `weather-condition`.
+    static let weatherCondition = Rswift.ImageResource(bundle: R.hostingBundle, name: "weather-condition")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "weather-condition", bundle: ..., traitCollection: ...)`
+    static func weatherCondition(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.weatherCondition, compatibleWith: traitCollection)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
 
   /// This `R.info` struct is generated, and contains static references to 1 properties.
   struct info {

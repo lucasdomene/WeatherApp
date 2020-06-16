@@ -11,6 +11,7 @@ import Foundation
 struct WeatherInfo {
     let description: String
     let iconPath: String
+    let code: Int
     
     var icon: URL? {
         var imageURLString = "https://openweathermap.org/img/wn/"
@@ -24,5 +25,6 @@ extension WeatherInfo: Codable {
     enum CodingKeys: String, CodingKey {
         case description = "main"
         case iconPath = "icon"
+        case code = "id"
     }
 }
