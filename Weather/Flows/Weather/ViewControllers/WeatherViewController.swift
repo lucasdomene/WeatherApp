@@ -15,6 +15,7 @@ class WeatherViewController: UIViewController {
     
     let viewModel: WeatherViewModel
     var gradientLayer: CAGradientLayer?
+    var currentCity: City?
     var viewData: WeatherViewData? {
         didSet {
             forecastCollection.reloadData()
@@ -54,19 +55,35 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
+        
+        loadRandomCity()
         setBackgroundColor()
         forecastCollection.configure()
         forecastCollection.delegate = self
         forecastCollection.dataSource = self
-        viewModel.fetchWeather(for: -22.90278, lon: -43.2075)
+    }
+    
+    private func loadRandomCity() {
+        currentCity = viewModel.randomCity()
+        viewModel.fetchWeather(for: currentCity!.lat,
+                               lon: currentCity!.lon)
+        
+        fade(animation: .fadeOut)
     }
     
     func update(weather: WeatherViewData) {
         viewData = weather
         
-        cityLabel.text = "Rio de Janeiro"
+        cityLabel.text = currentCity?.name
         temperatureView.set(weather: weather)
-        setBackgroundColor(for: 800)
+        setBackgroundColor(for: weather.code)
+        
+        fade(animation: .fadeIn)
+    }
+    
+    override func motionBegan(_ motion: UIEvent.EventSubtype,
+                              with event: UIEvent?) {
+        loadRandomCity()
     }
     
 }
@@ -168,6 +185,25 @@ extension WeatherViewController {
         gradientLayer!.colors = [startColor, endColor]
 
         view.layer.insertSublayer(gradientLayer!, at: 0)
+    }
+    
+}
+
+// MARK: - Animations
+
+extension WeatherViewController {
+    
+    enum Animation {
+        case fadeIn
+        case fadeOut
+    }
+    
+    func fade(animation: Animation) {
+        UIView.animate(withDuration: 1) {
+            self.cityLabel.alpha = animation == .fadeIn ? 1 : 0
+            self.temperatureView.alpha = animation == .fadeIn ? 1 : 0
+            self.forecastCollection.alpha = animation == .fadeIn ? 1 : 0
+        }
     }
     
 }

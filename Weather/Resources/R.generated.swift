@@ -420,7 +420,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 10 files.
+  /// This `R.file` struct is generated, and contains static references to 11 files.
   struct file {
     /// Resource file `SF-Pro-Rounded-Black.otf`.
     static let sfProRoundedBlackOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Black", pathExtension: "otf")
@@ -440,6 +440,8 @@ struct R: Rswift.Validatable {
     static let sfProRoundedThinOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Thin", pathExtension: "otf")
     /// Resource file `SF-Pro-Rounded-Ultralight.otf`.
     static let sfProRoundedUltralightOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Ultralight", pathExtension: "otf")
+    /// Resource file `cities.plist`.
+    static let citiesPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "cities", pathExtension: "plist")
     /// Resource file `weather-condition.png`.
     static let weatherConditionPng = Rswift.FileResource(bundle: R.hostingBundle, name: "weather-condition", pathExtension: "png")
 
@@ -494,6 +496,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "SF-Pro-Rounded-Ultralight", withExtension: "otf")`
     static func sfProRoundedUltralightOtf(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.sfProRoundedUltralightOtf
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "cities", withExtension: "plist")`
+    static func citiesPlist(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.citiesPlist
       return fileResource.bundle.url(forResource: fileResource)
     }
 

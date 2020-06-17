@@ -27,6 +27,8 @@
 		37200F7C249986C4007602F7 /* ForecastCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37200F7B249986C4007602F7 /* ForecastCollection.swift */; };
 		37200F7E2499C41A007602F7 /* WeatherTemperatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37200F7D2499C41A007602F7 /* WeatherTemperatureView.swift */; };
 		37200F802499D096007602F7 /* ForecastViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37200F7F2499D096007602F7 /* ForecastViewData.swift */; };
+		37200F822499DAA9007602F7 /* cities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 37200F812499DAA9007602F7 /* cities.plist */; };
+		37200F842499DB1E007602F7 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37200F832499DB1E007602F7 /* City.swift */; };
 		37BF45B324985CF20094E700 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BF45B224985CF20094E700 /* WeatherResponse.swift */; };
 		37BF45B524985D080094E700 /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BF45B424985D080094E700 /* Weather.swift */; };
 		37BF45B724985D230094E700 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BF45B624985D230094E700 /* WeatherInfo.swift */; };
@@ -99,6 +101,8 @@
 		37200F7B249986C4007602F7 /* ForecastCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastCollection.swift; sourceTree = "<group>"; };
 		37200F7D2499C41A007602F7 /* WeatherTemperatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTemperatureView.swift; sourceTree = "<group>"; };
 		37200F7F2499D096007602F7 /* ForecastViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastViewData.swift; sourceTree = "<group>"; };
+		37200F812499DAA9007602F7 /* cities.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = cities.plist; sourceTree = "<group>"; };
+		37200F832499DB1E007602F7 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		37BF45B224985CF20094E700 /* WeatherResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		37BF45B424985D080094E700 /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		37BF45B624985D230094E700 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 				37BF45C42498652C0094E700 /* Fonts */,
 				37C08C3F2498223D00D29842 /* R.generated.swift */,
 				371BDD95249818620092DE11 /* Assets.xcassets */,
+				37200F812499DAA9007602F7 /* cities.plist */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -272,6 +277,7 @@
 				37200F6024987DFF007602F7 /* WeatherColor.swift */,
 				37200F6624996C5D007602F7 /* WeatherConditionColor.swift */,
 				37200F6824996C70007602F7 /* GradientColor.swift */,
+				37200F832499DB1E007602F7 /* City.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -536,6 +542,7 @@
 				37BF45D12498652C0094E700 /* SF-Pro-Rounded-Light.otf in Resources */,
 				37BF45D32498652C0094E700 /* SF-Pro-Rounded-Medium.otf in Resources */,
 				37BF45CF2498652C0094E700 /* SF-Pro-Rounded-Regular.otf in Resources */,
+				37200F822499DAA9007602F7 /* cities.plist in Resources */,
 				37BF45D62498652C0094E700 /* SF-Pro-Rounded-Bold.otf in Resources */,
 				37BF45D52498652C0094E700 /* SF-Pro-Rounded-Heavy.otf in Resources */,
 				37BF45DA2498674A0094E700 /* weather-condition.png in Resources */,
@@ -655,6 +662,7 @@
 				371BDD8D249818610092DE11 /* AppDelegate.swift in Sources */,
 				37C08C6024984E1100D29842 /* Forecast.swift in Sources */,
 				37BF45B924985D3B0094E700 /* Temperature.swift in Sources */,
+				37200F842499DB1E007602F7 /* City.swift in Sources */,
 				37200F6524996705007602F7 /* WeatherViewData.swift in Sources */,
 				37200F6F2499759B007602F7 /* Navigator.swift in Sources */,
 				37C08C46249828F100D29842 /* HTTPMethod.swift in Sources */,

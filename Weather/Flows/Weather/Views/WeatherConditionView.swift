@@ -28,6 +28,7 @@ final class WeatherConditionView: UIView {
         let title = UILabel()
         title.font = R.font.sfProRoundedRegular(size: 50)
         title.textColor = .white
+        title.adjustsFontSizeToFitWidth = true
         return title
     }()
     

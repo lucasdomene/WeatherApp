@@ -6,6 +6,8 @@
 //  Copyright © 2020 domene. All rights reserved.
 //
 
+// swiftlint:disable force_try
+
 import Foundation
 
 class WeatherViewModel {
@@ -14,11 +16,19 @@ class WeatherViewModel {
     
     weak var view: WeatherViewController?
     private let weatherService: WeatherService
+    private var cities: [City]
    
     // MARK: - Init
     
     init(weatherService: WeatherService) {
         self.weatherService = weatherService
+        let path = R.file.citiesPlist()!
+        let data = try! Data(contentsOf: path)
+        cities = try! PropertyListDecoder().decode([City].self, from: data)
+    }
+    
+    func randomCity() -> City {
+        return cities.randomElement()!
     }
     
     // MARK: - Fetch
