@@ -18,4 +18,14 @@ extension Date {
         return String(weekDaySymbol.prefix(3))
     }
     
+    func formatted(timezoneOffset: Int) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: timezoneOffset)
+        dateFormatter.dateFormat = "h:mm a"
+        dateFormatter.amSymbol = "am"
+        dateFormatter.pmSymbol = "pm"
+        
+        return dateFormatter.string(from: self)
+    }
+    
 }

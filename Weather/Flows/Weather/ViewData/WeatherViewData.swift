@@ -57,6 +57,17 @@ struct WeatherViewData {
         return now > sunrise && now < sunset
     }
     
+    var time: String {
+        let date = Date(timeIntervalSince1970: weatherResponse.current.currentTimestamp
+        )
+        
+        let hour = date.formatted(
+            timezoneOffset: weatherResponse.timezoneOffset
+        )
+        
+        return date.weekday + ", " + hour
+    }
+    
     var forecast: [ForecastViewData] {
         return weatherResponse.forecast.map {
             ForecastViewData(forecast: $0)

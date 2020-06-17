@@ -9,12 +9,14 @@
 import Foundation
 
 struct WeatherResponse {
+    let timezoneOffset: Int
     let current: Weather
     let forecast: [Forecast]
 }
 
 extension WeatherResponse: Codable {
     enum CodingKeys: String, CodingKey {
+        case timezoneOffset = "timezone_offset"
         case current
         case forecast = "daily"
     }

@@ -35,6 +35,14 @@ class WeatherViewController: UIViewController {
         return title
     }()
     
+    lazy var timeLabel: UILabel = {
+        let time = UILabel()
+        time.font = R.font.sfProRoundedLight(size: 16)
+        time.textColor = .white
+        time.alpha = 0.7
+        return time
+    }()
+    
     let temperatureView = WeatherTemperatureView()
     
     let forecastCollection = ForecastCollection()
@@ -75,6 +83,7 @@ class WeatherViewController: UIViewController {
         viewData = weather
         
         cityLabel.text = currentCity?.name
+        timeLabel.text = weather.time
         temperatureView.set(weather: weather)
         setBackgroundColor(for: weather.code)
         
@@ -94,6 +103,7 @@ extension WeatherViewController: ViewCodable {
     
     func buildViewHierarchy() {
         view.addSubview(cityLabel)
+        view.addSubview(timeLabel)
         view.addSubview(temperatureView)
         view.addSubview(forecastCollection)
     }
@@ -103,6 +113,11 @@ extension WeatherViewController: ViewCodable {
         cityLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(70)
             make.centerX.equalToSuperview()
+        }
+        
+        timeLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(cityLabel.snp.bottom).offset(4)
         }
         
         temperatureView.snp.makeConstraints { make in
@@ -201,6 +216,7 @@ extension WeatherViewController {
     func fade(animation: Animation) {
         UIView.animate(withDuration: 1) {
             self.cityLabel.alpha = animation == .fadeIn ? 1 : 0
+            self.timeLabel.alpha = animation == .fadeIn ? 1 : 0
             self.temperatureView.alpha = animation == .fadeIn ? 1 : 0
             self.forecastCollection.alpha = animation == .fadeIn ? 1 : 0
         }
