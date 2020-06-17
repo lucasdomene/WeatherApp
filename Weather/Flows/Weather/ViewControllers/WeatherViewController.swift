@@ -26,22 +26,7 @@ class WeatherViewController: UIViewController {
         return title
     }()
     
-    lazy var stackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .center
-        return stackView
-    }()
-    
-    let weatherConditionView = WeatherConditionView()
-    
-    lazy var temperatureLabel: UILabel = {
-        let title = UILabel()
-        title.font = R.font.sfProRoundedLight(size: 150)
-        title.textColor = .white
-        return title
-    }()
+    let temperatureView = WeatherTemperatureView()
     
     lazy var forecastCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -85,18 +70,18 @@ class WeatherViewController: UIViewController {
     func update(weather: WeatherViewData) {
         viewData = weather
         
-        temperatureLabel.text = weather.temperature
+        temperatureView.temperatureLabel.text = weather.temperature
         cityLabel.text = "Rio de Janeiro"
-        weatherConditionView.conditionLabel.text = weather.condition
-        weatherConditionView.iconImageView.kf.setImage(
+        temperatureView.weatherConditionView.conditionLabel.text = weather.condition
+        temperatureView.weatherConditionView.iconImageView.kf.setImage(
             with: weather.iconURL,
             placeholder: R.image.weatherCondition()
         )
         
-        setBackgroundColor(for: weather.code)
+        setBackgroundColor(for: 800)
     }
     
-    private func setBackgroundColor(for code: Int = 800) {
+    private func setBackgroundColor(for code: Int = 801) {
         if gradientLayer != nil {
             gradientLayer!.removeFromSuperlayer()
         }
@@ -107,11 +92,16 @@ class WeatherViewController: UIViewController {
         
         let colors = WeatherColor(code: code).colors
         
-        gradientLayer!.colors = [
-            colors.dayColor.startColor,
-            colors.dayColor.endColor
-        ]
+        var startColor = colors.dayColor.startColor
+        var endColor = colors.dayColor.endColor
         
+        if let viewData = viewData, !viewData.isDay {
+            startColor = colors.nightColor.startColor
+            endColor = colors.nightColor.endColor
+        }
+        
+        gradientLayer!.colors = [startColor, endColor]
+
         view.layer.insertSublayer(gradientLayer!, at: 0)
     }
     
@@ -121,9 +111,7 @@ extension WeatherViewController: ViewCodable {
     
     func buildViewHierarchy() {
         view.addSubview(cityLabel)
-        view.addSubview(stackView)
-        stackView.addArrangedSubview(weatherConditionView)
-        stackView.addArrangedSubview(temperatureLabel)
+        view.addSubview(temperatureView)
         view.addSubview(forecastCollection)
     }
     
@@ -134,7 +122,7 @@ extension WeatherViewController: ViewCodable {
             make.centerX.equalToSuperview()
         }
         
-        stackView.snp.makeConstraints { make in
+        temperatureView.snp.makeConstraints { make in
             make.centerY.equalToSuperview().multipliedBy(0.9)
             make.left.right.equalToSuperview().inset(40)
             make.height.equalTo(200)

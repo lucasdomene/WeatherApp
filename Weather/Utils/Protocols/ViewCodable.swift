@@ -23,5 +23,7 @@ extension ViewCodable {
         additionalSetup()
     }
     
+    func setupConstraints() {}
+    
     func additionalSetup() {}
 }

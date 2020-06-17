@@ -39,6 +39,18 @@ struct WeatherViewData {
         return code
     }
     
+    var isDay: Bool {
+        let nowTimestamp = weatherResponse.current.currentTimestamp
+        let sunriseTimestamp = weatherResponse.current.sunsetTimestamp
+        let sunsetTimestamp = weatherResponse.current.sunriseTimestamp
+        
+        let now = Date(timeIntervalSince1970: nowTimestamp)
+        let sunrise = Date(timeIntervalSince1970: sunriseTimestamp)
+        let sunset = Date(timeIntervalSince1970: sunsetTimestamp)
+        
+        return now > sunrise && now < sunset
+    }
+    
     var forecast: [ForecastViewData] {
         return weatherResponse.forecast.map {
             ForecastViewData(forecast: $0)

@@ -58,12 +58,6 @@ extension ForecastView: ViewCodable {
         addArrangedSubview(minTemperatureLabel)
     }
     
-    func setupConstraints() {
-//        iconImageView.snp.makeConstraints { make in
-//            make.height.equalTo(iconImageView.snp.width)
-//        }
-    }
-    
     func additionalSetup() {
         axis = .vertical
         distribution = .fillEqually

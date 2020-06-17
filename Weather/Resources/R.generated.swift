@@ -106,7 +106,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.color` struct is generated, and contains static references to 24 colors.
+  /// This `R.color` struct is generated, and contains static references to 28 colors.
   struct color {
     /// Color `ColorA1`.
     static let colorA1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorA1")
@@ -156,6 +156,14 @@ struct R: Rswift.Validatable {
     static let colorL1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorL1")
     /// Color `ColorL2`.
     static let colorL2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorL2")
+    /// Color `ColorM1`.
+    static let colorM1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorM1")
+    /// Color `ColorM2`.
+    static let colorM2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorM2")
+    /// Color `ColorN1`.
+    static let colorN1 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorN1")
+    /// Color `ColorN2`.
+    static let colorN2 = Rswift.ColorResource(bundle: R.hostingBundle, name: "ColorN2")
 
     #if os(iOS) || os(tvOS)
     /// `UIColor(named: "ColorA1", bundle: ..., traitCollection: ...)`
@@ -370,6 +378,42 @@ struct R: Rswift.Validatable {
     @available(iOS 11.0, *)
     static func colorL2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
       return UIKit.UIColor(resource: R.color.colorL2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorM1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorM1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorM1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorM2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorM2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorM2, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorN1", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorN1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorN1, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIColor(named: "ColorN2", bundle: ..., traitCollection: ...)`
+    @available(tvOS 11.0, *)
+    @available(iOS 11.0, *)
+    static func colorN2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIColor? {
+      return UIKit.UIColor(resource: R.color.colorN2, compatibleWith: traitCollection)
     }
     #endif
 

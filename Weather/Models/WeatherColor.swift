@@ -30,8 +30,6 @@ enum WeatherColor {
             self = .snow
         case 700...781:
             self = .fog
-        case 200...232:
-            self = .thunderstorm
         case 800:
             self = .clear
         case 801...804:
@@ -43,8 +41,6 @@ enum WeatherColor {
     
     private var colorPath: (day: String, night: String) {
         switch self {
-        case .clear:
-            return ("A", "B")
         case .cloud:
             return ("A", "B")
         case .snow:
@@ -57,6 +53,8 @@ enum WeatherColor {
             return ("I", "J")
         case .drizzle:
             return ("K", "L")
+        case .clear:
+            return ("M", "N")
         }
     }
     
