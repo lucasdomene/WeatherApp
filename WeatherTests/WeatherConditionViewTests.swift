@@ -22,7 +22,7 @@ class WeatherConditionViewTests: XCTestCase {
         weatherConditionView.iconImageView.image = R.image.weatherCondition()
         assertSnapshot(matching: weatherConditionView,
                        as: .image,
-                       record: true)
+                       record: false)
     }
 
 }

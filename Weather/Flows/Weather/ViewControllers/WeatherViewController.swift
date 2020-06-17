@@ -13,10 +13,15 @@ class WeatherViewController: UIViewController {
     
     let viewModel: WeatherViewModel
     var gradientLayer: CAGradientLayer?
+    var viewData: WeatherViewData? {
+        didSet {
+            forecastCollection.reloadData()
+        }
+    }
     
     lazy var cityLabel: UILabel = {
         let title = UILabel()
-        title.font = R.font.sfProRoundedLight(size: 40)
+        title.font = R.font.sfProRoundedLight(size: 35)
         title.textColor = .white
         return title
     }()
@@ -38,6 +43,29 @@ class WeatherViewController: UIViewController {
         return title
     }()
     
+    lazy var forecastCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        
+        let collectionView = UICollectionView(frame: .zero,
+                                              collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        
+        collectionView.showsHorizontalScrollIndicator = false
+        
+        collectionView.register(
+            ForecastCell.self,
+            forCellWithReuseIdentifier: "ForecastCell"
+        )
+        collectionView.backgroundColor = .clear
+        return collectionView
+    }()
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -54,15 +82,18 @@ class WeatherViewController: UIViewController {
         viewModel.fetchWeather(for: -22.90278, lon: -43.2075)
     }
     
-    func updateWeather(_ weather: WeatherViewData) {
-        self.temperatureLabel.text = weather.temperature
-        self.cityLabel.text = "Rio de Janeiro"
-        self.weatherConditionView.conditionLabel.text = weather.condition
-        self.weatherConditionView.iconImageView.kf.setImage(
+    func update(weather: WeatherViewData) {
+        viewData = weather
+        
+        temperatureLabel.text = weather.temperature
+        cityLabel.text = "Rio de Janeiro"
+        weatherConditionView.conditionLabel.text = weather.condition
+        weatherConditionView.iconImageView.kf.setImage(
             with: weather.iconURL,
             placeholder: R.image.weatherCondition()
         )
-        self.setBackgroundColor(for: weather.code)
+        
+        setBackgroundColor(for: weather.code)
     }
     
     private func setBackgroundColor(for code: Int = 800) {
@@ -93,19 +124,26 @@ extension WeatherViewController: ViewCodable {
         view.addSubview(stackView)
         stackView.addArrangedSubview(weatherConditionView)
         stackView.addArrangedSubview(temperatureLabel)
+        view.addSubview(forecastCollection)
     }
     
     func setupConstraints() {
         
         cityLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(50)
+            make.top.equalToSuperview().inset(70)
             make.centerX.equalToSuperview()
         }
         
         stackView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+            make.centerY.equalToSuperview().multipliedBy(0.9)
             make.left.right.equalToSuperview().inset(40)
             make.height.equalTo(200)
+        }
+        
+        forecastCollection.snp.makeConstraints { make in
+            make.left.right.equalToSuperview()
+            make.height.equalTo(120)
+            make.bottom.equalToSuperview().inset(60)
         }
         
     }
@@ -114,4 +152,39 @@ extension WeatherViewController: ViewCodable {
         view.backgroundColor = .lightGray
     }
     
+}
+
+extension WeatherViewController: UICollectionViewDataSource {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        guard let weather = viewData else { return 0 }
+        return weather.forecast.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ForecastCell", for: indexPath) as! ForecastCell
+        
+        guard let weather = viewData else { return cell }
+        let forecast = weather.forecast[indexPath.row]
+        
+        cell.forecastView.weekdayLabel.text = forecast.weekday
+        cell.forecastView.iconImageView.kf.setImage(
+            with: forecast.iconURL,
+            placeholder: R.image.weatherCondition()
+        )
+        cell.forecastView.maxTemperatureLabel.text = forecast.maxTemperature
+        cell.forecastView.minTemperatureLabel.text = forecast.minTemperature
+        
+        return cell
+    }
+    
+}
+
+extension WeatherViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 60, height: 120)
+    }
 }

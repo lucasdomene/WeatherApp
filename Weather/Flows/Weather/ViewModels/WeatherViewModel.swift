@@ -12,25 +12,18 @@ class WeatherViewModel {
     
     weak var view: WeatherViewController?
     private let weatherService: WeatherService
-    private var weather: WeatherResponse? {
-        didSet {
-            let weatherViewData = WeatherViewData(
-                weatherResponse: self.weather!
-            )
-            view?.updateWeather(weatherViewData)
-        }
-    }
-    
+   
     init(weatherService: WeatherService) {
         self.weatherService = weatherService
     }
     
     func fetchWeather(for lat: Double, lon: Double) {
-        weatherService.weather(for: lat, lon: lon) { result in
+        weatherService.weather(for: lat, lon: lon) { [weak self] result in
             switch result {
             case .success(let weather):
                 DispatchQueue.main.async {
-                    self.weather = weather
+                    let viewData = WeatherViewData(weatherResponse: weather)
+                    self?.view?.update(weather: viewData)
                 }
             case .failure(let error):
                 print(error)
