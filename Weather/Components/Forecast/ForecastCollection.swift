@@ -31,6 +31,7 @@ final class ForecastCollection: UICollectionView {
             forCellWithReuseIdentifier: "ForecastCell"
         )
         backgroundColor = .clear
+        showsHorizontalScrollIndicator = false
     }
     
 }
