@@ -14,7 +14,9 @@ final class ForecastView: UIStackView {
     
     lazy var weekdayLabel: UILabel = {
         let weekDayLabel = UILabel()
-        weekDayLabel.font = R.font.sfProRoundedSemibold(size: 12)
+        weekDayLabel.font = R.font.sfProRoundedSemibold(
+            size: ForecastConstants.weekdayLabelSize
+        )
         weekDayLabel.textColor = .white
         return weekDayLabel
     }()
@@ -27,16 +29,20 @@ final class ForecastView: UIStackView {
     
     lazy var maxTemperatureLabel: UILabel = {
         let maxTemperatureLabel = UILabel()
-        maxTemperatureLabel.font = R.font.sfProRoundedRegular(size: 16)
+        maxTemperatureLabel.font = R.font.sfProRoundedRegular(
+            size: ForecastConstants.temperatureLabelSize
+        )
         maxTemperatureLabel.textColor = .white
         return maxTemperatureLabel
     }()
     
     lazy var minTemperatureLabel: UILabel = {
         let minTemperatureLabel = UILabel()
-        minTemperatureLabel.font = R.font.sfProRoundedRegular(size: 16)
+        minTemperatureLabel.font = R.font.sfProRoundedRegular(
+            size: ForecastConstants.temperatureLabelSize
+        )
         minTemperatureLabel.textColor = .white
-        minTemperatureLabel.alpha = 0.6
+        minTemperatureLabel.alpha = ForecastConstants.minTemperatureAlpha
         return minTemperatureLabel
     }()
     

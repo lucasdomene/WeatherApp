@@ -28,7 +28,7 @@ final class ForecastCollection: UICollectionView {
     func configure() {
         register(
             ForecastCell.self,
-            forCellWithReuseIdentifier: "ForecastCell"
+            forCellWithReuseIdentifier: ForecastConstants.cell
         )
         backgroundColor = .clear
         showsHorizontalScrollIndicator = false

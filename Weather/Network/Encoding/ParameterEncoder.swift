@@ -50,7 +50,7 @@ struct ParameterEncoder: ParameterEncoderType {
     }
     
     private func addDefaultParameters(urlParameters: inout Parameters) {
-        urlParameters["appid"] = "e64767712205e87d39ff3562c4e1dd8f"
+        urlParameters["appid"] = NetworkConstants.apiKey
         urlParameters["units"] = "metric"
     }
     

@@ -29,7 +29,7 @@ struct WeatherViewData {
     
     var condition: String {
         guard let condition = weatherResponse.current.info.first else {
-            return "Clear"
+            return WeatherConstants.defaultCondition
         }
         return condition.description
     }
@@ -40,7 +40,7 @@ struct WeatherViewData {
     
     var code: Int {
         guard let code = weatherResponse.current.info.first?.code else {
-            return 800
+            return WeatherConstants.defaultCode
         }
         return code
     }

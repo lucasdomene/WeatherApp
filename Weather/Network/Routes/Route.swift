@@ -23,7 +23,7 @@ protocol Route {
 
 extension Route {
     var baseURL: URL {
-        return URL(string: "https://api.openweathermap.org/data/2.5/")!
+        return URL(string: NetworkConstants.baseURL)!
     }
     
     func asURLRequest(parameterEncoder: ParameterEncoderType) -> URLRequest? {

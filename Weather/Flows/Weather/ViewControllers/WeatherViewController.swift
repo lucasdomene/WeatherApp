@@ -30,16 +30,20 @@ class WeatherViewController: UIViewController {
     
     lazy var cityLabel: UILabel = {
         let title = UILabel()
-        title.font = R.font.sfProRoundedLight(size: 35)
+        title.font = R.font.sfProRoundedLight(
+            size: WeatherViewConstants.cityLabelSize
+        )
         title.textColor = .white
         return title
     }()
     
     lazy var timeLabel: UILabel = {
         let time = UILabel()
-        time.font = R.font.sfProRoundedLight(size: 16)
+        time.font = R.font.sfProRoundedLight(
+            size: WeatherViewConstants.timeLabelSize
+        )
         time.textColor = .white
-        time.alpha = 0.7
+        time.alpha = WeatherViewConstants.timeLabelAlpha
         return time
     }()
     
@@ -111,25 +115,33 @@ extension WeatherViewController: ViewCodable {
     func setupConstraints() {
         
         cityLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(70)
+            make.top.equalToSuperview().inset(WeatherViewConstants.cityLabelTop)
             make.centerX.equalToSuperview()
         }
         
         timeLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(cityLabel.snp.bottom).offset(4)
+            make.top
+                .equalTo(cityLabel.snp.bottom)
+                .offset(WeatherViewConstants.timeLabelTop)
         }
         
         temperatureView.snp.makeConstraints { make in
-            make.centerY.equalToSuperview().multipliedBy(0.9)
-            make.left.right.equalToSuperview().inset(40)
-            make.height.equalTo(200)
+            make.centerY
+                .equalToSuperview()
+                .multipliedBy(WeatherViewConstants.temperatureCenterY)
+            make.left.right
+                .equalToSuperview()
+                .inset(WeatherViewConstants.temperatureEdge)
+            make.height.equalTo(WeatherViewConstants.temperatureHeight)
         }
         
         forecastCollection.snp.makeConstraints { make in
             make.left.right.equalToSuperview()
-            make.height.equalTo(120)
-            make.bottom.equalToSuperview().inset(60)
+            make.height.equalTo(WeatherViewConstants.forecastHeight)
+            make.bottom
+                .equalToSuperview()
+                .inset(WeatherViewConstants.forecastBottom)
         }
         
     }
@@ -152,7 +164,7 @@ extension WeatherViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: "ForecastCell",
+            withReuseIdentifier: ForecastConstants.cell,
             for: indexPath) as! ForecastCell
         
         guard let weather = viewData else { return cell }
@@ -170,7 +182,8 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 60, height: 120)
+        return CGSize(width: ForecastConstants.width,
+                      height: ForecastConstants.height)
     }
 }
 
@@ -216,7 +229,7 @@ extension WeatherViewController {
     func fade(animation: Animation) {
         UIView.animate(withDuration: 1) {
             self.cityLabel.alpha = animation == .fadeIn ? 1 : 0
-            self.timeLabel.alpha = animation == .fadeIn ? 1 : 0
+            self.timeLabel.alpha = animation == .fadeIn ? WeatherViewConstants.timeLabelAlpha : 0
             self.temperatureView.alpha = animation == .fadeIn ? 1 : 0
             self.forecastCollection.alpha = animation == .fadeIn ? 1 : 0
         }

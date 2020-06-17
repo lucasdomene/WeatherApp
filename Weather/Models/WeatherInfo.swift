@@ -14,9 +14,9 @@ struct WeatherInfo {
     let code: Int
     
     var icon: URL? {
-        var imageURLString = "https://openweathermap.org/img/wn/"
+        var imageURLString = NetworkConstants.imageURL
         imageURLString.append(iconPath)
-        imageURLString.append("@2x.png")
+        imageURLString.append(NetworkConstants.imageSuffix)
         return URL(string: imageURLString)
     }
 }
