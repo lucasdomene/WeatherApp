@@ -10,7 +10,11 @@ import UIKit
 
 final class ForecastCell: UICollectionViewCell {
     
+    // MARK: - Properties
+    
     let forecastView = ForecastView(frame: .zero)
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,10 +25,24 @@ final class ForecastCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
+    
+    func set(forecast: ForecastViewData) {
+        forecastView.weekdayLabel.text = forecast.weekday
+        forecastView.iconImageView.kf.setImage(
+            with: forecast.iconURL,
+            placeholder: R.image.weatherCondition()
+        )
+        forecastView.maxTemperatureLabel.text = forecast.maxTemperature
+        forecastView.minTemperatureLabel.text = forecast.minTemperature
+    }
+    
 }
 
+// MARK: - View Codable
+
 extension ForecastCell: ViewCodable {
-    
+
     func buildViewHierarchy() {
         contentView.addSubview(forecastView)
     }
@@ -34,5 +52,7 @@ extension ForecastCell: ViewCodable {
             make.edges.equalToSuperview()
         }
     }
-        
+      
+    func additionalSetup() {}
+    
 }

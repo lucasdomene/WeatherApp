@@ -12,15 +12,21 @@ typealias NetworkResponse = (Result<Data, Error>) -> Void
 
 final class NetworkManager {
     
+    // MARK: - Properties
+    
     private let session: URLSessionType
     private let parameterEncoder: ParameterEncoderType
     private var task: URLSessionTask?
+    
+    // MARK: - Init
     
     init(session: URLSessionType,
          parameterEncoder: ParameterEncoderType) {
         self.session = session
         self.parameterEncoder = parameterEncoder
     }
+    
+    // MARK: - Fetch
     
     func request(route: Route, completion: @escaping NetworkResponse) {
         guard let urlRequest = route.asURLRequest(

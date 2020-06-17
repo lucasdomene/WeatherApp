@@ -11,6 +11,8 @@ import Kingfisher
 
 class WeatherViewController: UIViewController {
     
+    // MARK: - Properties
+    
     let viewModel: WeatherViewModel
     var gradientLayer: CAGradientLayer?
     var viewData: WeatherViewData? {
@@ -18,6 +20,12 @@ class WeatherViewController: UIViewController {
             forecastCollection.reloadData()
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    // MARK: - Views
     
     lazy var cityLabel: UILabel = {
         let title = UILabel()
@@ -28,28 +36,9 @@ class WeatherViewController: UIViewController {
     
     let temperatureView = WeatherTemperatureView()
     
-    lazy var forecastCollection: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        
-        let collectionView = UICollectionView(frame: .zero,
-                                              collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        
-        collectionView.showsHorizontalScrollIndicator = false
-        
-        collectionView.register(
-            ForecastCell.self,
-            forCellWithReuseIdentifier: "ForecastCell"
-        )
-        collectionView.backgroundColor = .clear
-        return collectionView
-    }()
+    let forecastCollection = ForecastCollection()
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
+    // MARK: - Init
     
     init(viewModel: WeatherViewModel) {
         self.viewModel = viewModel
@@ -60,52 +49,29 @@ class WeatherViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
         setBackgroundColor()
+        forecastCollection.configure()
+        forecastCollection.delegate = self
+        forecastCollection.dataSource = self
         viewModel.fetchWeather(for: -22.90278, lon: -43.2075)
     }
     
     func update(weather: WeatherViewData) {
         viewData = weather
         
-        temperatureView.temperatureLabel.text = weather.temperature
         cityLabel.text = "Rio de Janeiro"
-        temperatureView.weatherConditionView.conditionLabel.text = weather.condition
-        temperatureView.weatherConditionView.iconImageView.kf.setImage(
-            with: weather.iconURL,
-            placeholder: R.image.weatherCondition()
-        )
-        
+        temperatureView.set(weather: weather)
         setBackgroundColor(for: 800)
     }
     
-    private func setBackgroundColor(for code: Int = 801) {
-        if gradientLayer != nil {
-            gradientLayer!.removeFromSuperlayer()
-        }
-        
-        gradientLayer = CAGradientLayer()
-        gradientLayer!.shouldRasterize = true
-        gradientLayer!.frame = view.bounds
-        
-        let colors = WeatherColor(code: code).colors
-        
-        var startColor = colors.dayColor.startColor
-        var endColor = colors.dayColor.endColor
-        
-        if let viewData = viewData, !viewData.isDay {
-            startColor = colors.nightColor.startColor
-            endColor = colors.nightColor.endColor
-        }
-        
-        gradientLayer!.colors = [startColor, endColor]
-
-        view.layer.insertSublayer(gradientLayer!, at: 0)
-    }
-    
 }
+
+// MARK: - View Codable
 
 extension WeatherViewController: ViewCodable {
     
@@ -142,6 +108,8 @@ extension WeatherViewController: ViewCodable {
     
 }
 
+// MARK: - Collection Data Source
+
 extension WeatherViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -151,23 +119,20 @@ extension WeatherViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ForecastCell", for: indexPath) as! ForecastCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: "ForecastCell",
+            for: indexPath) as! ForecastCell
         
         guard let weather = viewData else { return cell }
         let forecast = weather.forecast[indexPath.row]
-        
-        cell.forecastView.weekdayLabel.text = forecast.weekday
-        cell.forecastView.iconImageView.kf.setImage(
-            with: forecast.iconURL,
-            placeholder: R.image.weatherCondition()
-        )
-        cell.forecastView.maxTemperatureLabel.text = forecast.maxTemperature
-        cell.forecastView.minTemperatureLabel.text = forecast.minTemperature
+        cell.set(forecast: forecast)
         
         return cell
     }
     
 }
+
+// MARK: - Collection Layout
 
 extension WeatherViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
@@ -175,4 +140,34 @@ extension WeatherViewController: UICollectionViewDelegateFlowLayout {
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 60, height: 120)
     }
+}
+
+// MARK: - Background Setup
+
+extension WeatherViewController {
+    
+    private func setBackgroundColor(for code: Int = 801) {
+        if gradientLayer != nil {
+            gradientLayer!.removeFromSuperlayer()
+        }
+        
+        gradientLayer = CAGradientLayer()
+        gradientLayer!.shouldRasterize = true
+        gradientLayer!.frame = view.bounds
+        
+        let colors = WeatherColor(code: code).colors
+        
+        var startColor = colors.dayColor.startColor
+        var endColor = colors.dayColor.endColor
+        
+        if let viewData = viewData, !viewData.isDay {
+            startColor = colors.nightColor.startColor
+            endColor = colors.nightColor.endColor
+        }
+        
+        gradientLayer!.colors = [startColor, endColor]
+
+        view.layer.insertSublayer(gradientLayer!, at: 0)
+    }
+    
 }

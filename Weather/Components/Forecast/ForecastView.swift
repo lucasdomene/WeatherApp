@@ -10,6 +10,8 @@ import UIKit
 
 final class ForecastView: UIStackView {
     
+    // MARK: - Views
+    
     lazy var weekdayLabel: UILabel = {
         let weekDayLabel = UILabel()
         weekDayLabel.font = R.font.sfProRoundedSemibold(size: 12)
@@ -38,6 +40,8 @@ final class ForecastView: UIStackView {
         return minTemperatureLabel
     }()
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -49,14 +53,18 @@ final class ForecastView: UIStackView {
     
 }
 
+// MARK: - View Codable
+
 extension ForecastView: ViewCodable {
-    
+        
     func buildViewHierarchy() {
         addArrangedSubview(weekdayLabel)
         addArrangedSubview(iconImageView)
         addArrangedSubview(maxTemperatureLabel)
         addArrangedSubview(minTemperatureLabel)
     }
+    
+    func setupConstraints() {}
     
     func additionalSetup() {
         axis = .vertical

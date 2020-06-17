@@ -14,14 +14,20 @@ class MainNavigator: Navigator {
         case weather
     }
     
+    // MARK: - Properties
+    
     private let navigationController: UINavigationController
     private let networkManager: NetworkManager
+    
+    // MARK: - Init
     
     init(navigationController: UINavigationController,
          networkManager: NetworkManager) {
         self.navigationController = navigationController
         self.networkManager = networkManager
     }
+    
+    // MARK: - Navigator
     
     func navigate(to destination: MainNavigator.Destination) {
         let viewController = makeViewController(for: destination)
@@ -32,6 +38,8 @@ class MainNavigator: Navigator {
         navigationController.setNavigationBarHidden(true,
                                                     animated: false)
     }
+    
+    // MARK: - Builderß
     
     func makeViewController(for destination: Destination) -> UIViewController {
         switch destination {

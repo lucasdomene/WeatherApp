@@ -10,11 +10,17 @@ import Foundation
 
 struct WeatherViewData {
     
+    // MARK: - Properties
+    
     private let weatherResponse: WeatherResponse
+    
+    // MARK: - Init
     
     init(weatherResponse: WeatherResponse) {
         self.weatherResponse = weatherResponse
     }
+    
+    // MARK: - Computed Properties
     
     var temperature: String {
         let temperature = Int(weatherResponse.current.temperature)
@@ -55,49 +61,6 @@ struct WeatherViewData {
         return weatherResponse.forecast.map {
             ForecastViewData(forecast: $0)
         }
-    }
-    
-}
-
-struct ForecastViewData {
-    
-    private let forecast: Forecast
-    
-    init(forecast: Forecast) {
-        self.forecast = forecast
-    }
-    
-    var minTemperature: String {
-        let temperature = Int(forecast.temperature.min)
-        return "\(temperature)°"
-    }
-    
-    var maxTemperature: String {
-        let temperature = Int(forecast.temperature.max)
-        return "\(temperature)°"
-    }
-    
-    var condition: String {
-        guard let condition = forecast.info.first else {
-            return "Clear"
-        }
-        return condition.description
-    }
-    
-    var iconURL: URL? {
-        return forecast.info.first?.icon
-    }
-    
-    var code: Int {
-        guard let code = forecast.info.first?.code else {
-            return 800
-        }
-        return code
-    }
-    
-    var weekday: String {
-        let date = Date(timeIntervalSince1970: forecast.timestamp)
-        return date.weekday
     }
     
 }

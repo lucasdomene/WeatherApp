@@ -10,6 +10,8 @@ import UIKit
 
 final class WeatherConditionView: UIView {
     
+    // MARK: - Views
+    
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -29,6 +31,8 @@ final class WeatherConditionView: UIView {
         return title
     }()
     
+    // MARK: - Init
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
@@ -39,6 +43,8 @@ final class WeatherConditionView: UIView {
     }
     
 }
+
+// MARK: - View Codable
 
 extension WeatherConditionView: ViewCodable {
     
@@ -57,5 +63,7 @@ extension WeatherConditionView: ViewCodable {
             make.edges.equalToSuperview()
         }
     }
+    
+    func additionalSetup() {}
     
 }

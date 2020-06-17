@@ -10,12 +10,18 @@ import Foundation
 
 class WeatherViewModel {
     
+    // MARK: - Properties
+    
     weak var view: WeatherViewController?
     private let weatherService: WeatherService
    
+    // MARK: - Init
+    
     init(weatherService: WeatherService) {
         self.weatherService = weatherService
     }
+    
+    // MARK: - Fetch
     
     func fetchWeather(for lat: Double, lon: Double) {
         weatherService.weather(for: lat, lon: lon) { [weak self] result in

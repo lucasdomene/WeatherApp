@@ -10,6 +10,8 @@ import UIKit
 
 final class WeatherTemperatureView: UIStackView {
     
+    // MARK: - Views
+    
     let weatherConditionView = WeatherConditionView()
     
     lazy var temperatureLabel: UILabel = {
@@ -18,6 +20,8 @@ final class WeatherTemperatureView: UIStackView {
         title.textColor = .white
         return title
     }()
+    
+    // MARK: - Init
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -28,7 +32,20 @@ final class WeatherTemperatureView: UIStackView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: - Setup
+    
+    func set(weather: WeatherViewData) {
+        temperatureLabel.text = weather.temperature
+        weatherConditionView.conditionLabel.text = weather.condition
+        weatherConditionView.iconImageView.kf.setImage(
+            with: weather.iconURL,
+            placeholder: R.image.weatherCondition()
+        )
+    }
+    
 }
+
+// MARK: - View Codable
 
 extension WeatherTemperatureView: ViewCodable {
     
@@ -36,6 +53,8 @@ extension WeatherTemperatureView: ViewCodable {
         addArrangedSubview(weatherConditionView)
         addArrangedSubview(temperatureLabel)
     }
+    
+    func setupConstraints() {}
     
     func additionalSetup() {
         axis = .vertical
