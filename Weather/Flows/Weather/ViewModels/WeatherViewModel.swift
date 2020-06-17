@@ -17,6 +17,7 @@ class WeatherViewModel {
     weak var view: WeatherViewController?
     private let weatherService: WeatherService
     private var cities: [City]
+    private var isFetching = false
    
     // MARK: - Init
     
@@ -34,6 +35,8 @@ class WeatherViewModel {
     // MARK: - Fetch
     
     func fetchWeather(for lat: Double, lon: Double) {
+        if isFetching { return }
+        isFetching = true
         weatherService.weather(for: lat, lon: lon) { [weak self] result in
             switch result {
             case .success(let weather):
@@ -44,6 +47,7 @@ class WeatherViewModel {
             case .failure(let error):
                 print(error)
             }
+            self?.isFetching = false
         }
     }
     
