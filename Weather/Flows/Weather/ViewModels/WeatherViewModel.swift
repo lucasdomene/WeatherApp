@@ -10,26 +10,31 @@
 
 import Foundation
 
-class WeatherViewModel {
+protocol WeatherViewModelType {
+    func randomCity() -> City?
+    func fetchWeather(for lat: Double, lon: Double)
+}
+
+class WeatherViewModel: WeatherViewModelType {
     
     // MARK: - Properties
     
-    weak var view: WeatherViewController?
-    private let weatherService: WeatherService
+    weak var view: WeatherViewType?
+    private let weatherService: WeatherServiceType
     private var cities: [City]
     private var isFetching = false
    
     // MARK: - Init
     
-    init(weatherService: WeatherService) {
+    init(weatherService: WeatherServiceType) {
         self.weatherService = weatherService
         let path = R.file.citiesPlist()!
         let data = try! Data(contentsOf: path)
         cities = try! PropertyListDecoder().decode([City].self, from: data)
     }
     
-    func randomCity() -> City {
-        return cities.randomElement()!
+    func randomCity() -> City? {
+        return cities.randomElement()
     }
     
     // MARK: - Fetch
@@ -40,10 +45,8 @@ class WeatherViewModel {
         weatherService.weather(for: lat, lon: lon) { [weak self] result in
             switch result {
             case .success(let weather):
-                DispatchQueue.main.async {
-                    let viewData = WeatherViewData(weatherResponse: weather)
-                    self?.view?.update(weather: viewData)
-                }
+                let viewData = WeatherViewData(weatherResponse: weather)
+                self?.view?.update(weather: viewData)
             case .failure(let error):
                 print(error)
             }

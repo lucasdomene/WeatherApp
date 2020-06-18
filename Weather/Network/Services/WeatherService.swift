@@ -10,15 +10,21 @@ import Foundation
 
 typealias WeatherResult = (Result<WeatherResponse, Error>) -> Void
 
-struct WeatherService {
+protocol WeatherServiceType {
+    func weather(for lat: Double,
+                 lon: Double,
+                 completion: @escaping WeatherResult)
+}
+
+struct WeatherService: WeatherServiceType {
     
     // MARK: - Properties
     
-    private let networkManager: NetworkManager
+    private let networkManager: NetworkManagerType
     
     // MARK: - Init
     
-    init(networkManager: NetworkManager) {
+    init(networkManager: NetworkManagerType) {
         self.networkManager = networkManager
     }
        
@@ -44,7 +50,7 @@ struct WeatherService {
                 
                 completion(.success(weatherResponse))
             } catch {
-                completion(.failure(WeatherError.fetching))
+                completion(.failure(WeatherError.parsing))
             }
         case .failure(let error):
             completion(.failure(error))

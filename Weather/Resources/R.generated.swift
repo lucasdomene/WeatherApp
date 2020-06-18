@@ -420,7 +420,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.file` struct is generated, and contains static references to 11 files.
+  /// This `R.file` struct is generated, and contains static references to 12 files.
   struct file {
     /// Resource file `SF-Pro-Rounded-Black.otf`.
     static let sfProRoundedBlackOtf = Rswift.FileResource(bundle: R.hostingBundle, name: "SF-Pro-Rounded-Black", pathExtension: "otf")
@@ -444,6 +444,8 @@ struct R: Rswift.Validatable {
     static let citiesPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "cities", pathExtension: "plist")
     /// Resource file `weather-condition.png`.
     static let weatherConditionPng = Rswift.FileResource(bundle: R.hostingBundle, name: "weather-condition", pathExtension: "png")
+    /// Resource file `weatherResponse.json`.
+    static let weatherResponseJson = Rswift.FileResource(bundle: R.hostingBundle, name: "weatherResponse", pathExtension: "json")
 
     /// `bundle.url(forResource: "SF-Pro-Rounded-Black", withExtension: "otf")`
     static func sfProRoundedBlackOtf(_: Void = ()) -> Foundation.URL? {
@@ -508,6 +510,12 @@ struct R: Rswift.Validatable {
     /// `bundle.url(forResource: "weather-condition", withExtension: "png")`
     static func weatherConditionPng(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.weatherConditionPng
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    /// `bundle.url(forResource: "weatherResponse", withExtension: "json")`
+    static func weatherResponseJson(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.weatherResponseJson
       return fileResource.bundle.url(forResource: fileResource)
     }
 
@@ -595,10 +603,19 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 1 images.
+  /// This `R.image` struct is generated, and contains static references to 2 images.
   struct image {
+    /// Image `backfround`.
+    static let backfround = Rswift.ImageResource(bundle: R.hostingBundle, name: "backfround")
     /// Image `weather-condition`.
     static let weatherCondition = Rswift.ImageResource(bundle: R.hostingBundle, name: "weather-condition")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "backfround", bundle: ..., traitCollection: ...)`
+    static func backfround(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.backfround, compatibleWith: traitCollection)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "weather-condition", bundle: ..., traitCollection: ...)`
@@ -676,6 +693,7 @@ struct _R: Rswift.Validatable {
       let name = "LaunchScreen"
 
       static func validate() throws {
+        if UIKit.UIImage(named: "backfround", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'backfround' is used in storyboard 'LaunchScreen', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }

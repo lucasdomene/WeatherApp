@@ -10,14 +10,14 @@ import Foundation
 
 enum WeatherError: Error {
     case noConnection
-    case fetching
+    case parsing
     
     init(code: Int) {
         switch code {
         case NSURLErrorNotConnectedToInternet:
             self = .noConnection
         default:
-            self = .fetching
+            self = .parsing
         }
     }
 }

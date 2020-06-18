@@ -22,7 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     )
     
     // Network Instance
-    lazy var networkManager = NetworkManager(session: session, parameterEncoder: parameterEncoder)
+    lazy var networkManager: NetworkManagerType = NetworkManager(
+        session: session,
+        parameterEncoder: parameterEncoder
+    )
 
     func scene(_ scene: UIScene,
                willConnectTo session: UISceneSession,

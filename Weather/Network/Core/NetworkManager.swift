@@ -8,9 +8,13 @@
 
 import Foundation
 
+protocol NetworkManagerType {
+    func request(route: Route, completion: @escaping NetworkResponse)
+}
+
 typealias NetworkResponse = (Result<Data, Error>) -> Void
 
-final class NetworkManager {
+final class NetworkManager: NetworkManagerType {
     
     // MARK: - Properties
     
@@ -31,7 +35,10 @@ final class NetworkManager {
     func request(route: Route, completion: @escaping NetworkResponse) {
         guard let urlRequest = route.asURLRequest(
             parameterEncoder: parameterEncoder
-        ) else { return }
+        ) else {
+            completion(.failure(WeatherError.parsing))
+            return
+        }
         
         task = session.dataTask(with: urlRequest) {
             data, _, error in
@@ -41,7 +48,7 @@ final class NetworkManager {
             }
             
             guard let data = data else {
-                completion(.failure(WeatherError.fetching))
+                completion(.failure(WeatherError.parsing))
                 return
             }
             

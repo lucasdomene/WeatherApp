@@ -17,12 +17,12 @@ class MainNavigator: Navigator {
     // MARK: - Properties
     
     private let navigationController: UINavigationController
-    private let networkManager: NetworkManager
+    private let networkManager: NetworkManagerType
     
     // MARK: - Init
     
     init(navigationController: UINavigationController,
-         networkManager: NetworkManager) {
+         networkManager: NetworkManagerType) {
         self.navigationController = navigationController
         self.networkManager = networkManager
     }

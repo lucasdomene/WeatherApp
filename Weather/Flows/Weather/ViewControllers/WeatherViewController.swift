@@ -9,16 +9,22 @@
 import UIKit
 import Kingfisher
 
-class WeatherViewController: UIViewController {
+protocol WeatherViewType: class {
+    func update(weather: WeatherViewData)
+}
+
+class WeatherViewController: UIViewController, WeatherViewType {
     
     // MARK: - Properties
     
-    let viewModel: WeatherViewModel
+    let viewModel: WeatherViewModelType
     var gradientLayer: CAGradientLayer?
     var currentCity: City?
     var viewData: WeatherViewData? {
         didSet {
-            forecastCollection.reloadData()
+            DispatchQueue.main.async {
+                self.weatherView.forecastCollection.reloadData()
+            }
         }
     }
     
@@ -28,32 +34,11 @@ class WeatherViewController: UIViewController {
     
     // MARK: - Views
     
-    lazy var cityLabel: UILabel = {
-        let title = UILabel()
-        title.font = R.font.sfProRoundedLight(
-            size: WeatherViewConstants.cityLabelSize
-        )
-        title.textColor = .white
-        return title
-    }()
-    
-    lazy var timeLabel: UILabel = {
-        let time = UILabel()
-        time.font = R.font.sfProRoundedLight(
-            size: WeatherViewConstants.timeLabelSize
-        )
-        time.textColor = .white
-        time.alpha = WeatherViewConstants.timeLabelAlpha
-        return time
-    }()
-    
-    let temperatureView = WeatherTemperatureView()
-    
-    let forecastCollection = ForecastCollection()
+   let weatherView = WeatherView()
     
     // MARK: - Init
     
-    init(viewModel: WeatherViewModel) {
+    init(viewModel: WeatherViewModelType) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -67,18 +52,22 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        
         loadRandomCity()
         setBackgroundColor()
-        forecastCollection.configure()
-        forecastCollection.delegate = self
-        forecastCollection.dataSource = self
+        weatherView.forecastCollection.configure()
+        weatherView.forecastCollection.delegate = self
+        weatherView.forecastCollection.dataSource = self
     }
     
     private func loadRandomCity() {
         currentCity = viewModel.randomCity()
-        viewModel.fetchWeather(for: currentCity!.lat,
-                               lon: currentCity!.lon)
+        
+        guard let city = currentCity else {
+            return
+        }
+        
+        viewModel.fetchWeather(for: city.lat,
+                               lon: city.lon)
         
         fade(animation: .fadeOut)
     }
@@ -86,68 +75,19 @@ class WeatherViewController: UIViewController {
     func update(weather: WeatherViewData) {
         viewData = weather
         
-        cityLabel.text = currentCity?.name
-        timeLabel.text = weather.time
-        temperatureView.set(weather: weather)
-        setBackgroundColor(for: weather.code)
-        
-        fade(animation: .fadeIn)
+        DispatchQueue.main.async {
+            self.weatherView.cityLabel.text = self.currentCity?.name
+            self.weatherView.timeLabel.text = weather.time
+            self.weatherView.temperatureView.set(weather: weather)
+            self.setBackgroundColor(for: weather.code)
+            
+            self.fade(animation: .fadeIn)
+        }
     }
     
     override func motionBegan(_ motion: UIEvent.EventSubtype,
                               with event: UIEvent?) {
         loadRandomCity()
-    }
-    
-}
-
-// MARK: - View Codable
-
-extension WeatherViewController: ViewCodable {
-    
-    func buildViewHierarchy() {
-        view.addSubview(cityLabel)
-        view.addSubview(timeLabel)
-        view.addSubview(temperatureView)
-        view.addSubview(forecastCollection)
-    }
-    
-    func setupConstraints() {
-        
-        cityLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().inset(WeatherViewConstants.cityLabelTop)
-            make.centerX.equalToSuperview()
-        }
-        
-        timeLabel.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.top
-                .equalTo(cityLabel.snp.bottom)
-                .offset(WeatherViewConstants.timeLabelTop)
-        }
-        
-        temperatureView.snp.makeConstraints { make in
-            make.centerY
-                .equalToSuperview()
-                .multipliedBy(WeatherViewConstants.temperatureCenterY)
-            make.left.right
-                .equalToSuperview()
-                .inset(WeatherViewConstants.temperatureEdge)
-            make.height.equalTo(WeatherViewConstants.temperatureHeight)
-        }
-        
-        forecastCollection.snp.makeConstraints { make in
-            make.left.right.equalToSuperview()
-            make.height.equalTo(WeatherViewConstants.forecastHeight)
-            make.bottom
-                .equalToSuperview()
-                .inset(WeatherViewConstants.forecastBottom)
-        }
-        
-    }
-    
-    func additionalSetup() {
-        view.backgroundColor = .lightGray
     }
     
 }
@@ -174,6 +114,28 @@ extension WeatherViewController: UICollectionViewDataSource {
         return cell
     }
     
+}
+
+// MARK: - Collection Layout
+
+extension WeatherViewController: ViewCodable {
+    func buildViewHierarchy() {
+        view.addSubview(weatherView)
+    }
+    
+    func setupConstraints() {
+        weatherView.snp.makeConstraints { make in
+            make.top
+                .equalToSuperview()
+                .inset(WeatherViewConstants.cityLabelTop)
+            make.left.right.equalToSuperview()
+            make.bottom
+                .equalToSuperview()
+                .inset(WeatherViewConstants.cityLabelTop)
+        }
+    }
+    
+    func additionalSetup() {}
 }
 
 // MARK: - Collection Layout
@@ -228,10 +190,7 @@ extension WeatherViewController {
     
     func fade(animation: Animation) {
         UIView.animate(withDuration: 1) {
-            self.cityLabel.alpha = animation == .fadeIn ? 1 : 0
-            self.timeLabel.alpha = animation == .fadeIn ? WeatherViewConstants.timeLabelAlpha : 0
-            self.temperatureView.alpha = animation == .fadeIn ? 1 : 0
-            self.forecastCollection.alpha = animation == .fadeIn ? 1 : 0
+            self.weatherView.alpha = animation == .fadeIn ? 1 : 0
         }
     }
     
