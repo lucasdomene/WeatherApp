@@ -19,6 +19,7 @@ class WeatherViewController: UIViewController, WeatherViewType {
     // MARK: - Properties
     
     let viewModel: WeatherViewModelType
+    private let generator = UIImpactFeedbackGenerator(style: .heavy)
     private var gradientLayer: CAGradientLayer?
     private var currentCity: City?
     private var viewData: WeatherViewData? {
@@ -117,10 +118,14 @@ class WeatherViewController: UIViewController, WeatherViewType {
         }
     }
     
+    func shake() {
+        generator.impactOccurred()
+    }
+    
     override func motionBegan(_ motion: UIEvent.EventSubtype,
                               with event: UIEvent?) {
         loadRandomCity()
-        
+        shake()
         if viewModel.hasError {
             hideError()
         }
