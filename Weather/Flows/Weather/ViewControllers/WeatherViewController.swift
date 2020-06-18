@@ -36,11 +36,19 @@ class WeatherViewController: UIViewController, WeatherViewType {
     // MARK: - Views
     
     let weatherView = WeatherView()
+    
     lazy var errorView: ErrorView = {
         let errorView = ErrorView()
         errorView.alpha = 0
         errorView.imageView.image = R.image.error()
         return errorView
+    }()
+    
+    lazy var shakeImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.alpha = 0
+        imageView.image = R.image.shake()
+        return imageView
     }()
     
     // MARK: - Init
@@ -77,6 +85,7 @@ class WeatherViewController: UIViewController, WeatherViewType {
                                lon: city.lon)
         
         weatherView.fadeOut()
+        shakeImage.fadeOut()
     }
     
     func update(weather: WeatherViewData) {
@@ -89,6 +98,7 @@ class WeatherViewController: UIViewController, WeatherViewType {
             self.setBackgroundColor(for: weather.code)
             
             self.weatherView.fadeIn()
+            self.shakeImage.fadeIn()
         }
     }
     
@@ -148,6 +158,7 @@ extension WeatherViewController: ViewCodable {
     func buildViewHierarchy() {
         view.addSubview(weatherView)
         view.addSubview(errorView)
+        view.addSubview(shakeImage)
     }
     
     func setupConstraints() {
@@ -159,6 +170,12 @@ extension WeatherViewController: ViewCodable {
             make.bottom
                 .equalToSuperview()
                 .inset(WeatherViewConstants.cityLabelTop)
+        }
+        
+        shakeImage.snp.makeConstraints { make in
+            make.width.height.equalTo(40)
+            make.top.equalTo(weatherView)
+            make.right.equalToSuperview().inset(8)
         }
         
         errorView.snp.makeConstraints { make in
