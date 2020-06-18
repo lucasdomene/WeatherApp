@@ -12,7 +12,7 @@ protocol NetworkManagerType {
     func request(route: Route, completion: @escaping NetworkResponse)
 }
 
-typealias NetworkResponse = (Result<Data, Error>) -> Void
+typealias NetworkResponse = (Result<Data, WeatherError>) -> Void
 
 final class NetworkManager: NetworkManagerType {
     
@@ -45,6 +45,7 @@ final class NetworkManager: NetworkManagerType {
             if let error = error {
                 let code = (error as NSError).code
                 completion(.failure(WeatherError(code: code)))
+                return
             }
             
             guard let data = data else {

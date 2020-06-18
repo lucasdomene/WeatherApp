@@ -10,7 +10,7 @@ import Foundation
 @testable import Weather
 
 class WeatherViewMock: WeatherViewType {
-    
+        
     let viewModel: WeatherViewModelType
     var didSetViewData = false
     
@@ -21,4 +21,6 @@ class WeatherViewMock: WeatherViewType {
     func update(weather: WeatherViewData) {
         didSetViewData = true
     }
+    
+    func show(error: WeatherError) {}
 }

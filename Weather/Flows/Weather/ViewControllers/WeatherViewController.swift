@@ -11,6 +11,7 @@ import Kingfisher
 
 protocol WeatherViewType: class {
     func update(weather: WeatherViewData)
+    func show(error: WeatherError)
 }
 
 class WeatherViewController: UIViewController, WeatherViewType {
@@ -34,7 +35,13 @@ class WeatherViewController: UIViewController, WeatherViewType {
     
     // MARK: - Views
     
-   let weatherView = WeatherView()
+    let weatherView = WeatherView()
+    lazy var errorView: ErrorView = {
+        let errorView = ErrorView()
+        errorView.alpha = 0
+        errorView.imageView.image = R.image.error()
+        return errorView
+    }()
     
     // MARK: - Init
     
@@ -69,7 +76,7 @@ class WeatherViewController: UIViewController, WeatherViewType {
         viewModel.fetchWeather(for: city.lat,
                                lon: city.lon)
         
-        fade(animation: .fadeOut)
+        weatherView.fadeOut()
     }
     
     func update(weather: WeatherViewData) {
@@ -81,13 +88,32 @@ class WeatherViewController: UIViewController, WeatherViewType {
             self.weatherView.temperatureView.set(weather: weather)
             self.setBackgroundColor(for: weather.code)
             
-            self.fade(animation: .fadeIn)
+            self.weatherView.fadeIn()
+        }
+    }
+    
+    func show(error: WeatherError) {
+        DispatchQueue.main.async {
+            self.errorView.messageLabel.text = error.rawValue
+            self.errorView.fadeIn()
+            self.errorView.setNeedsDisplay()
+            self.errorView.messageLabel.setNeedsDisplay()
+        }
+    }
+    
+    func hideError() {
+        DispatchQueue.main.async {
+            self.errorView.fadeOut()
         }
     }
     
     override func motionBegan(_ motion: UIEvent.EventSubtype,
                               with event: UIEvent?) {
         loadRandomCity()
+        
+        if viewModel.hasError {
+            hideError()
+        }
     }
     
 }
@@ -116,11 +142,12 @@ extension WeatherViewController: UICollectionViewDataSource {
     
 }
 
-// MARK: - Collection Layout
+// MARK: - ViewCodable
 
 extension WeatherViewController: ViewCodable {
     func buildViewHierarchy() {
         view.addSubview(weatherView)
+        view.addSubview(errorView)
     }
     
     func setupConstraints() {
@@ -132,6 +159,12 @@ extension WeatherViewController: ViewCodable {
             make.bottom
                 .equalToSuperview()
                 .inset(WeatherViewConstants.cityLabelTop)
+        }
+        
+        errorView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.8)
+            make.height.equalToSuperview().multipliedBy(0.2)
         }
     }
     
@@ -179,19 +212,23 @@ extension WeatherViewController {
     
 }
 
-// MARK: - Animations
+protocol Fadable {
+    func fadeIn()
+    func fadeOut()
+}
 
-extension WeatherViewController {
-    
-    enum Animation {
-        case fadeIn
-        case fadeOut
-    }
-    
-    func fade(animation: Animation) {
+extension Fadable where Self: UIView {
+    func fadeIn() {
         UIView.animate(withDuration: 1) {
-            self.weatherView.alpha = animation == .fadeIn ? 1 : 0
+            self.alpha = 1
         }
     }
     
+    func fadeOut() {
+        UIView.animate(withDuration: 1) {
+            self.alpha = 0
+        }
+    }
 }
+
+extension UIView: Fadable {}

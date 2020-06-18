@@ -8,9 +8,9 @@
 
 import Foundation
 
-enum WeatherError: Error {
-    case noConnection
-    case parsing
+enum WeatherError: String, Error {
+    case noConnection = "Ops! Check your internet connection."
+    case parsing = "Ops! Something went wrong. Try again."
     
     init(code: Int) {
         switch code {

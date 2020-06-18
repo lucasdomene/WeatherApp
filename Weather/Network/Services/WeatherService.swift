@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias WeatherResult = (Result<WeatherResponse, Error>) -> Void
+typealias WeatherResult = (Result<WeatherResponse, WeatherError>) -> Void
 
 protocol WeatherServiceType {
     func weather(for lat: Double,
@@ -42,7 +42,7 @@ struct WeatherService: WeatherServiceType {
     
     // MARK: - Parse
     
-    private func handle<T: Decodable>(_ result: Result<Data, Error>, completion: @escaping (Result<T, Error>) -> Void) {
+    private func handle<T: Decodable>(_ result: Result<Data, WeatherError>, completion: @escaping (Result<T, WeatherError>) -> Void) {
         switch result {
         case .success(let data):
             do {

@@ -13,6 +13,7 @@ import Foundation
 protocol WeatherViewModelType {
     func randomCity() -> City?
     func fetchWeather(for lat: Double, lon: Double)
+    var hasError: Bool { get }
 }
 
 class WeatherViewModel: WeatherViewModelType {
@@ -23,6 +24,7 @@ class WeatherViewModel: WeatherViewModelType {
     private let weatherService: WeatherServiceType
     private var cities: [City]
     private var isFetching = false
+    var hasError = false
    
     // MARK: - Init
     
@@ -47,8 +49,10 @@ class WeatherViewModel: WeatherViewModelType {
             case .success(let weather):
                 let viewData = WeatherViewData(weatherResponse: weather)
                 self?.view?.update(weather: viewData)
+                self?.hasError = false
             case .failure(let error):
-                print(error)
+                self?.view?.show(error: error)
+                self?.hasError = true
             }
             self?.isFetching = false
         }

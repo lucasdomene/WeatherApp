@@ -35,8 +35,7 @@ class WeatherServiceTests: XCTestCase {
             case .success:
                 XCTFail("Should not be successful")
             case .failure(let error):
-                let weatherError = error as? WeatherError
-                XCTAssertEqual(weatherError, WeatherError.parsing)
+                XCTAssertEqual(error, WeatherError.parsing)
             }
         }
     }
@@ -49,8 +48,7 @@ class WeatherServiceTests: XCTestCase {
             case .success:
                 XCTFail("Should not be successful")
             case .failure(let error):
-                let weatherError = error as? WeatherError
-                XCTAssertEqual(weatherError, WeatherError.noConnection)
+                XCTAssertEqual(error, WeatherError.noConnection)
             }
         }
     }

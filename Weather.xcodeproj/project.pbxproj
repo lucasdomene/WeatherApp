@@ -35,6 +35,8 @@
 		375E746E249B13590066CA87 /* WeatherViewMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E746D249B13590066CA87 /* WeatherViewMock.swift */; };
 		375E7471249B13F40066CA87 /* WeatherViewDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E7470249B13F30066CA87 /* WeatherViewDataTests.swift */; };
 		375E7473249B20A90066CA87 /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E7472249B20A90066CA87 /* WeatherView.swift */; };
+		375E7475249BD1B70066CA87 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E7474249BD1B70066CA87 /* ErrorView.swift */; };
+		375E7477249BD4AA0066CA87 /* ErrorViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 375E7476249BD4AA0066CA87 /* ErrorViewTests.swift */; };
 		37BA36EA249AC26100D8F191 /* ForecastConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BA36E9249AC26100D8F191 /* ForecastConstants.swift */; };
 		37BA36EC249AC41700D8F191 /* WeatherConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BA36EB249AC41700D8F191 /* WeatherConstants.swift */; };
 		37BA36EE249AC50E00D8F191 /* NetworkConstans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37BA36ED249AC50E00D8F191 /* NetworkConstans.swift */; };
@@ -125,6 +127,8 @@
 		375E746D249B13590066CA87 /* WeatherViewMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewMock.swift; sourceTree = "<group>"; };
 		375E7470249B13F30066CA87 /* WeatherViewDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherViewDataTests.swift; sourceTree = "<group>"; };
 		375E7472249B20A90066CA87 /* WeatherView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		375E7474249BD1B70066CA87 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
+		375E7476249BD4AA0066CA87 /* ErrorViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewTests.swift; sourceTree = "<group>"; };
 		37BA36E9249AC26100D8F191 /* ForecastConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastConstants.swift; sourceTree = "<group>"; };
 		37BA36EB249AC41700D8F191 /* WeatherConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherConstants.swift; sourceTree = "<group>"; };
 		37BA36ED249AC50E00D8F191 /* NetworkConstans.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConstans.swift; sourceTree = "<group>"; };
@@ -388,6 +392,7 @@
 		37200F7324997EC9007602F7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				375E7474249BD1B70066CA87 /* ErrorView.swift */,
 				37200F7424997EE3007602F7 /* Forecast */,
 			);
 			path = Components;
@@ -426,6 +431,7 @@
 			children = (
 				37200F7724998147007602F7 /* ForecastViewTests.swift */,
 				37BF45C2249863320094E700 /* WeatherConditionViewTests.swift */,
+				375E7476249BD4AA0066CA87 /* ErrorViewTests.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -786,6 +792,7 @@
 				371BDD8F249818610092DE11 /* SceneDelegate.swift in Sources */,
 				37200F87249ABDCB007602F7 /* WeatherViewConstants.swift in Sources */,
 				37C08C5E24983AF500D29842 /* WeatherService.swift in Sources */,
+				375E7475249BD1B70066CA87 /* ErrorView.swift in Sources */,
 				37C08C492498292600D29842 /* EncoderType.swift in Sources */,
 				37C08C5824982A2F00D29842 /* WeatherError.swift in Sources */,
 				37C08C5524982A0A00D29842 /* NetworkManager.swift in Sources */,
@@ -816,6 +823,7 @@
 				37BA36F5249AC7B100D8F191 /* DateTests.swift in Sources */,
 				375E746E249B13590066CA87 /* WeatherViewMock.swift in Sources */,
 				37200F7824998147007602F7 /* ForecastViewTests.swift in Sources */,
+				375E7477249BD4AA0066CA87 /* ErrorViewTests.swift in Sources */,
 				375E746A249AEEF40066CA87 /* WeatherViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
