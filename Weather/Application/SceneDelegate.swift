@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // Default Session
     lazy var session: URLSession = {
         let sessionConfig = URLSessionConfiguration.default
-        sessionConfig.timeoutIntervalForResource = 5.0
+        sessionConfig.timeoutIntervalForResource = 10.0
         return URLSession(configuration: sessionConfig)
     }()
     

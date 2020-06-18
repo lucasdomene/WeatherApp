@@ -13,7 +13,7 @@ enum WeatherViewConstants {
     // MARK: - CityLabel Constraints
     
     static let cityLabelSize: CGFloat = 35
-    static let cityLabelTop = 70
+    static let inset = 70
     
     // MARK: - TimeLabel Constraints
     

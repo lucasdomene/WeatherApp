@@ -19,9 +19,9 @@ class WeatherViewController: UIViewController, WeatherViewType {
     // MARK: - Properties
     
     let viewModel: WeatherViewModelType
-    var gradientLayer: CAGradientLayer?
-    var currentCity: City?
-    var viewData: WeatherViewData? {
+    private var gradientLayer: CAGradientLayer?
+    private var currentCity: City?
+    private var viewData: WeatherViewData? {
         didSet {
             DispatchQueue.main.async {
                 self.weatherView.forecastCollection.reloadData()
@@ -165,11 +165,11 @@ extension WeatherViewController: ViewCodable {
         weatherView.snp.makeConstraints { make in
             make.top
                 .equalToSuperview()
-                .inset(WeatherViewConstants.cityLabelTop)
+                .inset(WeatherViewConstants.inset)
             make.left.right.equalToSuperview()
             make.bottom
                 .equalToSuperview()
-                .inset(WeatherViewConstants.cityLabelTop)
+                .inset(WeatherViewConstants.inset)
         }
         
         shakeImage.snp.makeConstraints { make in
@@ -228,24 +228,3 @@ extension WeatherViewController {
     }
     
 }
-
-protocol Fadable {
-    func fadeIn()
-    func fadeOut()
-}
-
-extension Fadable where Self: UIView {
-    func fadeIn() {
-        UIView.animate(withDuration: 1) {
-            self.alpha = 1
-        }
-    }
-    
-    func fadeOut() {
-        UIView.animate(withDuration: 1) {
-            self.alpha = 0
-        }
-    }
-}
-
-extension UIView: Fadable {}
