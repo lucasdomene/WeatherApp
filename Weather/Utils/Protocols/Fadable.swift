@@ -6,6 +6,8 @@
 //  Copyright © 2020 domene. All rights reserved.
 //
 
+import UIKit
+
 protocol Fadable {
     func fadeIn()
     func fadeOut()
@@ -26,4 +28,3 @@ extension Fadable where Self: UIView {
 }
 
 extension UIView: Fadable {}
-
